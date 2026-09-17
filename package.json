@@ -1,0 +1,11 @@
+{
+  "name": "uci-ieee-pages",
+  "private": true,
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "preview": "node scripts/serve-pages.mjs",
+    "install:sites": "npm ci --prefix IEEE-Website && npm ci --prefix micromouse-webpages && npm ci --prefix ops-webpages",
+    "build": "npm run build --prefix IEEE-Website && npm run sass --prefix micromouse-webpages && npm run sass --prefix ops-webpages && node scripts/assemble-pages.mjs",
+    "lint": "npm run lint --prefix IEEE-Website"
+  }
+}

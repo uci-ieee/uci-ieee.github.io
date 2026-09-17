@@ -1,0 +1,27 @@
+
+:root {
+  /** Global Variables **/
+  --primary-color:  rgba(0,163,253,1);
+  --primary-color-dark:  rgba(28,117,188,0.95);
+  --primary-color-light:  rgb(109, 199, 248);
+  --secondary-color: rgba(240, 240, 240, 1);
+  --primary-text-color: #616161;
+  --secondary-text-color: darkgray;
+
+
+	scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Roboto', 'Arial';
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--primary-text-color);
+  background-color: white;
+  /* background-color: #e6e6e6;*/
+
+}
+
+[data-bs-theme=light] {
+  color-scheme: light;
+}

@@ -1,0 +1,10 @@
+**/node_modules/
+**/.next/
+**/out/
+/dist/
+/.source-git-backups/
+.DS_Store
+**/.DS_Store
+*.tsbuildinfo
+.env*
+**/.env*

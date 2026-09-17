@@ -1,0 +1,222 @@
+// Custom.scss
+// Option A: Include all of Bootstrap
+
+// Include any default variable overrides here (though functions won't be available)
+$primary: #0091e1;
+$secondary: #8f939b;
+$success: #12805f;
+$info: #d1ecfb;
+$warning: #ffc107;
+$danger: #dc3545;
+$light: #f5f7fc;
+$dark: #0c0c0c;
+
+$theme-colors: (
+    primary: $primary,
+    secondary: $secondary,
+    success: $success,
+    info: $info,
+    warning: $warning,
+    danger: $danger,
+    light: $light,
+    dark: $dark,
+    // add any additional color below
+);
+
+$display-font-sizes: (
+    1: 6rem,
+    2: 3.5rem,
+    3: 3.25rem,
+    4: 3rem,
+    5: 2.5rem,
+    6: 2rem
+);
+
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+// add imports of all scss files
+@import "./index.scss";
+@import "./project/project_template.scss";
+@import "./js/ops_header.scss";
+@import "./js/ops_footer.scss";
+@import "./js/card.scss";
+
+// Then add additional custom code here
+
+body {
+    scroll-behavior: smooth;
+    font-family: 'Roboto', sans-serif;
+    // overflow-x: hidden !important;
+}
+
+.text-gray {
+    color: $gray-600;
+}
+
+.text-red {
+    color: $red-500;
+}
+
+.text-orange {
+    color: $orange-500;
+}
+
+.text-yellow {
+    color: $yellow-500;
+}
+
+.text-green {
+    color: $green-500;
+}
+
+.text-blue {
+    color: $blue-500;
+}
+
+.text-indigo {
+    color: $indigo-400;
+}
+
+.text-purple {
+    color: $purple-500;
+}
+
+.text-pink {
+    color: $pink-400;
+}
+
+
+
+
+
+@keyframes blur {
+    0% {
+        filter: blur(0px);
+        -webkit-filter: blur(0px);
+        -moz-filter: blur(0px);
+        -o-filter: blur(0px);
+        -ms-filter: blur(0px);
+    }
+
+    100% {
+        filter: blur(10px);
+        -webkit-filter: blur(10px);
+        -moz-filter: blur(10px);
+        -o-filter: blur(10px);
+        -ms-filter: blur(10px);
+    }
+}
+
+
+
+.timeline-with-icons {
+    margin-left: 2rem;
+    border-left: 1px solid hsl(0, 0%, 90%);
+    position: relative;
+    list-style: none;
+}
+
+.timeline-with-icons .timeline-item {
+    position: relative;
+}
+
+.timeline-with-icons .timeline-item:after {
+    position: absolute;
+    display: block;
+    top: 0;
+}
+
+.timeline-with-icons .timeline-icon {
+    position: absolute;
+    left: -48px;
+    background-color: $info;
+    color: $primary;
+    border-radius: 50%;
+    height: 31px;
+    width: 31px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.timeline-with-icons .timeline-icon-big {
+    position: absolute;
+    left: -53px;
+    background-color: $info;
+    color: $primary;
+    border-radius: 50%;
+    height: 41px;
+    width: 41px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pride {
+    background: linear-gradient(89.7deg, rgba(223, 0, 0, 1) 2.7%, rgba(214, 91, 0, 1) 15.1%, rgb(223, 200, 0) 29.5%, rgb(6, 189, 0) 45.8%, rgba(29, 255, 255, 1) 61.5%, rgba(5, 17, 255, 1) 76.4%, rgb(169, 0, 211) 92.4%) !important;
+}
+
+.pride .nav-item>a {
+    color: $white !important;
+}
+
+/*--------------------------------------------------------------
+# officers
+--------------------------------------------------------------*/
+
+.officers .member {
+    text-align: center;
+    padding-top: 20px;
+    margin-bottom: 20px;
+    background: #fff;
+    border: 1px solid #eef0ef;
+    flex-grow: 1;
+}
+
+.officers .member img {
+    margin: -1px -1px 30px -1px;
+}
+
+.officers .member .member-content {
+    padding: 0 20px 30px 20px;
+}
+
+.officers .member h4 {
+    font-weight: 700;
+    margin-bottom: 2px;
+    font-size: 18px;
+}
+
+.officers .member span {
+    font-style: italic;
+    display: block;
+    font-size: 13px;
+}
+
+.officers .member p {
+    padding-top: 10px;
+    font-size: 14px;
+    font-style: italic;
+    color: #aaaaaa;
+}
+
+.officers .member .social {
+    margin-top: 15px;
+}
+
+.officers .member .social a {
+    color: #7e9486;
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+.officers .member .social a:hover {
+    color: #00629b;
+    text-decoration: none;
+    font-size: 16.5px;
+}
+
+.officers .member .social i {
+    font-size: 18px;
+    margin: 0 2px;
+}

@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-bs-theme="light">
+
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <!--Title-->
+    <title>Open Project Space</title>
+    <!--Favicon-->
+    <link rel="icon" href="./assets/images/ops_logo_favicon.png">
+    <!--Roboto Font CDN-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
+    <!--Beckman Font CDN-->
+    <link href="https://fonts.cdnfonts.com/css/beckman" rel="stylesheet">
+    <!-- Custom Stylesheet "custom.css" used for Bootstrap 5.3.0 css-->
+    <link rel="stylesheet" href="./css/custom.css" type="text/css">
+    <!-- Popper JS v2.11.8 (Bootstrap Dependency) CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <!-- Bootstrap JS v5.3.0 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
+        integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
+        crossorigin="anonymous"></script>
+    <!-- Bootstrap Icons CSS v1.10.0 CDN-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Highlight JS v11.7.0-->
+    <link rel="stylesheet" href="./css/highlight.js/default.min.css" type="text/css">
+    <link rel="stylesheet" href="./css/highlight.js/arduino-light.min.css" type="text/css">
+    <script src="./js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+
+<body style="">
+	<!-- ======= Header ======= -->
+	<script src="./js/ops_header.js"></script>
+	<!-- End Header -->
+
+	<div class="container-xl pj-layout my-5">
+		<!-- ======= Sidebar ======= -->
+		<aside class="pj-sidebar ">
+			<nav id="project-toc" class="pj-toc d-flex flex-column px-2 pt-2 pb-4">
+				<ul class="nav flex-column">
+					<h5 class="mt-2 mb-2 mx-3">Contents</h5>
+					<li class="nav-item">
+						<a class="nav-link" href="#pj-heading-introduction">Overview</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#pj-heading-arduino-libraries">Installing Arduino Libraries</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#pj-heading-concepts">Concepts</a>
+
+						<ul class="nav">
+							<li class="nav-item">
+								<a class="nav-link" href="#pj-heading-photoresistor">Photoresistor</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#pj-heading-aht20">AHT20 Sensor</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#pj-heading-lcd">LCD with I<sup>2</sup>C Backpack</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#pj-heading-wifi">WiFi</a>
+							</li>
+						</ul>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#pj-heading-esp32pinout">ESP32 Pinout</a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link" href="#pj-heading-requirements">Requirements</a>
+						<ul class="nav">
+							<li class="nav-item">
+								<a class="nav-link" href="#pj-heading-transmitter-station">Transmitter Station</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#pj-heading-receiver-station">Receiver Station</a>
+							</li>
+						</ul>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#pj-heading-parts">Parts</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#pj-heading-schematics">Schematics</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#pj-heading-instructions">Instructions</a>
+						<ul class="nav">
+							<li class="nav-item">
+								<a class="nav-link" href="#pj-heading-checkpoint1">Checkpoint 1</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#pj-heading-checkpoint2">Checkpoint 2</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#pj-heading-checkpoint3">Checkpoint 3</a>
+							</li>
+						</ul>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#pj-heading-deliverables">Deliverables</a>
+					</li>
+				</ul>
+			</nav>
+		</aside>
+		<!-- End Sidebar -->
+
+		<main class="pj-main p-3" data-bs-spy="scroll" data-bs-target="#project-toc" data-bs-root-margin="0px 0px -40%"
+			data-bs-smooth-scroll="true" tabindex="0">
+			<div class="pj-content">
+			<div class="d-flex flex-row justify-content-between mb-5">
+				<div class="">
+					<h4>Project 6</h4>
+					<h1 class="fw-bold">Weather Station</h1>
+				</div>
+				<div class="alert alert-light" role="alert">
+					<i class="bi bi-calendar-event me-1"></i>
+					Updated 2025.01.21 <br>
+					By Sahil and Zicong
+				</div>
+			</div>
+
+			<h2 class="mb-3 fw-bold" id="pj-heading-introduction">Overview</h2>
+			<p class="mb-5">
+				This next project is a culmination of all that you have learned in communication. You will transfer data
+				between two ESP32 boards and
+				several embedded devices using Wifi and I<sup>2</sup>C. The goal? Your system will be a full-fledged,
+				wireless weather station.
+				An outdoor ESP32 unit, connected to temperature, humidity, and light sensors, will transmit its data
+				over radio to the indoor ESP32 unit,
+				which will print this information on a display.
+			</p>
+
+			<h2 class="mb-3 fw-bold" id="pj-heading-arduino-libraries">Installing Arduino Libraries</h2>
+			<p class="mb-3">
+				Here is a quick recap on how you can install Arduino libraries in the
+				<a class="link-primary" href="https://www.arduino.cc/en/software" target="_blank"
+					rel="noopener noreferrer">Arduino IDE 2.0.0+</a>
+			</p>
+			<ol class="mb-4 list-group list-group-numbered">
+				<li class="list-group-item">
+					Download the library as a <strong>.zip</strong>
+				</li>
+				<li class="list-group-item">
+					In the Arduino IDE, go to <strong>Sketch → Include Library → Add .ZIP Library…</strong>
+				</li>
+				<li class="list-group-item">
+					Select the <strong>.zip</strong> of the library and click <strong>Open</strong>.
+				</li>
+			</ol>
+			<img class="img-fluid mb-4" src=".\assets\images\ops_arduino_ide_zip_library.png">
+
+			<p class="mb-4">
+				You're done! Just make sure to <code class="pj-code language-arduino">#include</code> the library header
+				file so that your
+				code compiles correctly.
+			</p>
+
+			<h3 class="mb-3" id="pj-heading-photoresistor">Photoresistor</h3>
+				<p>
+					A <strong>photoresistor</strong> is a type of resistor that changes its resistance based on the amount 
+					of light it is exposed to. This is possible because it is made of a semiconductor material 
+					that becomes more electrically conductive as it absorbs electromagnetic radiation such as 
+					visible light. It offers a simple and effective way to measure light levels and use that data in various projects.
+				</p>
+				<img class="pj-img-fluid mx-auto mb-5" 
+					src="./assets/images/project_4_new/ops_project_4_photoresistor.png" width=450>
+				
+				
+				<h3 class="mb-3 fw-light">Using it with ESP32</h3>
+				<div class="mb-3">
+				<p class>
+					Like a normal resistor, the photoresistor has no polarity and can be connected both ways. We can connect the photoresistor in series
+					with a normal resistor to create a <strong>voltage divider</strong> at the node between the photoresistor and the normal resistor. The voltage would vary based on the light level,
+					and by connecting that node to one of the ESP32’s <strong>analog-to-digital converters (ADC)</strong> with a jumper wire,
+					we can translate the analog signal into a discrete integer value in the range of <code class="pj-code language-arduino">0-4095</code> using <code class="pj-code language-arduino">analogRead()</code>.
+				</p>
+				<img class="pj-img-fluid mx-auto mb-5" 
+				src="./assets/images/project_4_new/ops_project__4_photoresistor_schem.png" width=550>
+				</div>
+
+
+			<table class="table pj-download-table mb-5">
+				<tbody>
+					<tr>
+						<td>AHT20 Library</td>
+						<td>
+							<a class="btn btn-outline-success mx-3"
+								href="assets/libraries/Adafruit_AHTX0.zip"
+								role="button"><i class="bi bi-download"></i> Download</a>
+						</td>
+					</tr>
+					<tr>
+						<td>LiquidCrystal I<sup>2</sup>C Library</td>
+						<td>
+							<a class="btn btn-outline-success mx-3"
+								href="assets\libraries\LiquidCrystal_I2C-1.1.2.zip"
+								role="button"><i class="bi bi-download"></i> Download</a>
+						</td>
+					</tr>
+					<tr>
+						<td>WiFiConfig Library</td>
+						<td>
+							<a class="btn btn-outline-success mx-3"
+								href="assets/libraries/WiFiConfig.zip"
+								role="button"><i class="bi bi-download"></i> Download</a>
+						</td>
+					</tr>
+					
+				</tbody>
+			</table>
+
+			<h2 class="mb-3 fw-bold" id="pj-heading-concepts">Concepts</h2>
+			<h3 class="mb-3" id="pj-heading-aht20">AHT20 Sensor</h3>
+
+			<p class="mb-5">
+				We will use the AHT20 sensor module to measure temperature and humidity. This component is rather
+				straightforward.
+				The AHT20 uses the <a class="link-primary" href="https://docs.arduino.cc/learn/communication/wire/" target="_blank"
+				rel="noopener noreferrer">Inter-Integrated Circuit (I²C)® protocol</a>
+				to communicate with the ESP32 board over a single data line and clock line. We simply need to accept the data at the ESP32 and
+				display it.
+			</p>
+
+			<h4 class="mb-3 fw-light">AHT20 Pinout</h4>
+			<img class="pj-img-fluid-end" src="assets/images/ops_project_6_AHT20pinout.png" width="250">
+			<p class="mb-5">
+				To the right is the pinout of the AHT20.
+				<br><br>
+				The GND and <span class="text-red">VCC</span> pins power the sensor module. Note that the <span
+					class="text-red">VCC</span> pin takes a voltage between 3.3 and 5V, but to keep it simple,
+				<strong>connect it to the VCC pin</strong> of the ESP32 board.
+				<br><br>
+				<span style="color: rgb(58, 202, 58);">SDA</span> is the serial data pin corresponding to the <strong>data line</strong>. 
+				<span style="color: rgb(43, 154, 209);">SCL</span> is the serial clock pin corresponding to the clock line.
+				At the rising clock edge of the <strong>clock line</strong>, a bit of data is sent to and/or from the controller (ESP32) and a peripheral 
+				(AHT20 sensor) on the data line. These pins should be <strong>connected to digital pins</strong> on the ESP32 to facilitate I²C communication.
+			</p>
+
+			<h4 class="mb-3 fw-light">Using the AHT20 and Wire Library</h4>
+			<p class="mb-3">
+
+				Writing the code for the AHT20 is almost as easy as wiring it! You can download the AHT library
+				<a class="link-primary"
+					href="assets/libraries/Adafruit_AHTX0.zip">here</a> (The wire library is built-in).  
+				Make sure to include the header files:
+			</p>
+			<p class="mb-3">
+				<code class="pj-code language-arduino">#include &lt;Adafruit_AHTX0.h&gt;</code> <br>
+			</p>
+			<p class="mb-3">
+				<code class="pj-code language-arduino">#include &lt;Wire.h&gt;</code> <br>
+			</p>
+			<p class="mb-3">
+				The wire built-in library allows us to set our own SDA and SCL pins for I2C. You can define your I2C pins by writing:
+			</p>
+			<p class="mb-3">
+				<code class="pj-code language-arduino">#define I2C_SDA 6 //pin 6</code> <br>
+				<code class="pj-code language-arduino">#define I2C_SCL 7 //pin 7</code> <br>
+			</p>
+			<p class="mb-3">
+				In <code class="pj-code language-arduino">void setup()</code>, configure the I2C pins using:
+			</p>
+			<p class="mb-3">
+				<code class="pj-code language-arduino">Wire.begin(I2C_SDA, I2C_SCL);</code> <br>
+			</p>	
+			<p class="mb-3">
+				At the core of this library is the Adafruit_AHTX0 class, which you will instantiate as an object and use to
+				read
+				data from the sensor.
+			</p>
+			<p class="mb-3">
+				Create an object as follows, declaring it in the global scope. <br> <code class="pj-code language-arduino">Adafruit_AHTX0 aht;</code>
+			</p>
+			<p class="mb-3">
+				Then, initialize two sensors_event_t objects called humidity and temp. sensors_event_t is a structure defined in the Adafruit Library. <code
+					class="pj-code language-arduino">sensors_event_t humidity, temp;</code>
+			</p>
+			<p class="mb-3">	
+				To start communication with the AHT20, call the
+				<code class="pj-code language-arduino">aht.begin()</code> function.<br>
+				<code class="pj-code language-arduino">aht.begin();</code>
+			</p>
+			<p class="mb-5">	
+				To collect data from the sensor, call the
+				<code class="pj-code language-arduino">getEvent()</code> function from the aht object as follows. <br>
+				<code class="pj-code language-arduino">aht.getEvent(&humidity, &temp);</code>
+			</p>
+			<p class="mb-3">
+				By calling <code class="pj-code language-arduino">getEvent()</code>, humidity and temp are updated with the latest sensor values.
+				You can now for example print these values to the serial monitor, just make sure in <code class="pj-code language-arduino">void setup()</code> you have included <code class="pj-code language-arduino">serial.Begin(115200);</code>.
+			</p>
+			<p class="mb-3">
+				<code class="pj-code language-arduino">Serial.print(humidity.relative_humidity);</code> <br>
+				<code class="pj-code language-arduino">Serial.print(temp.temperature);</code>
+			</p>
+			<p class="mb-3">
+				Temperature is Celsius by default.
+			</p>
+
+			<h3 class="mb-3" id="pj-heading-lcd">LCD with I<sup>2</sup>C Backpack</h3>
+			<p class="mb-3">
+				The Liquid Crystal Display or LCD is a classic piece of technology for displaying characters from a microcontroller board. 
+				Our particular display has the dimensions 16x2, meaning it has 16 columns and 2 rows.
+				<br><br>
+				Traditionally, characters are transmitted from the board to the LCD in a parallel protocol, along with bits for other 
+				features like backlighting and positioning. Instead, we’ll use an I<sup>2</sup>C backpack, which translates an I<sup>2</sup>C signal to parallel. 
+				This reduces the mess of wiring over 10 pins to the ESP32 to just four.
+				<br><br>
+			</p>
+			<h4 class="mb-3 fw-light">I<sup>2</sup>C Backpack Pinout Diagram </h4>
+			<p class="mb-3">
+				Below is a pinout of the I<sup>2</sup>C backpack attached to the LCD. Focus on the four pins labeled on the backpack. You should recognize two pins as the 
+				<span class="text-green">SDA</span> and <span class="text-blue">SCL</span> lines for I<sup>2</sup>C protocol.
+			</p>
+				<img class="img-fluid mb-4" src=".\assets\images\ops_i2c_backpack_lcd_annotated.png">
+			
+			<p class="mb-5">
+				It should also come as no surprise that the GND and <span class="text-orange">VCC</span> pins power the backpack and the LCD. Note that the <span class="text-orange">VCC</span> pin accepts 5V, 
+				so <strong> connect it to the 5V pin </strong> of the ESP32 board.
+			</p>
+
+				
+
+			<h4 class="mb-3 fw-light">Wiring the ESP32 to the I<sup>2</sup>C Backpack</h4>
+			<p class="mb-3">
+				The ESP32 is designed to handle I<sup>2</sup>C communication through certain pins on the board,
+				which connect to the backpack as follows.
+			</p>
+
+			<table class="table pj-download-table mb-5">
+				<tr>
+					<th>I<sup>2</sup>C Backpack Pins</th>
+					<th>ESP32 Pins</th>
+				</tr>
+				<tr>
+					<td>GND</td>
+					<td>GND</td>
+				</tr>
+				<tr>
+					<td><span class="text-red">VCC</span></td>
+					<td>5V</td>
+				</tr>
+				<tr>
+					<td><span class="text-green">SDA</span></td>
+					<td>8</td>
+				</tr>
+				<tr>
+					<td><span class="text-blue">SCL</span></td>
+					<td>9</td>
+				</tr>
+			</table>
+			<p class="mb-5">
+				Having trouble seeing the text on your LCD? Use a Phillips screwdriver to turn
+				the potentiometer on the backpack. This will adjust the contrast of the LCD.
+			</p>
+
+			<h4 class="mb-3 fw-light" style="">Using the LiquidCrystal I<sup>2</sup>C Library</h4>
+			<p class="mb-3">
+
+				Download the library <a class="link-primary"
+					href="assets\libraries\LiquidCrystal_I2C-1.1.2.zip">here</a>.
+				Make sure to include the header file:
+			</p>
+			<p class="mb-3">
+				<code class="pj-code language-arduino">#include &lt;LiquidCrystal_I2C.h&gt;</code>
+			</p>
+			<p class="mb-3">
+				To display text, you will instantiate an object of the LiquidCrystal_I2C class, declaring it in the
+				global scope. Note in the constructor the <code class="pj-code language-arduino">address</code>
+				argument , which should be <code class="pj-code language-arduino">0x27</code>,
+				the default I2C address of the backpack. The remaining arguments should match the dimensions of the
+				LCD.
+			</p>
+			<p class="mb-3">
+				<code class="pj-code language-arduino">LiquidCrysal_I2C lcd(int address, int columns, int rows);</code>
+			</p>
+			<p class="mb-3">
+				You will call lcd’s <code class="pj-code language-arduino">init()</code> and <code
+					class="pj-code language-arduino">backlight()</code> functions just once to initialize the
+				display.
+				Place this code in your <code class="pj-code language-arduino">setup()</code> function.
+			</p>
+			<p class="mb-3">
+				<code class="pj-code language-arduino">lcd.init(); </code>
+				<br>
+				<code class="pj-code language-arduino">lcd.backlight(); </code>
+			</p>
+			<p class="mb-3">
+				Now, you can print to the LCD as though you are in a text editor. You’ll have to move a “cursor”
+				with the lcd’s <code class="pj-code language-arduino">cursor()</code> function.
+				Remember that the columns and rows are indexed starting from zero.
+			</p>
+			<p class="mb-3">
+				<code class="pj-code language-arduino">lcd.cursor(int column, int row); </code>
+			</p>
+
+			<p class="mb-3">
+				Print characters using one of lcd’s following overloaded <code
+					class="pj-code language-arduino">print()</code> function. Remember that a string can be
+				represented by a string literal like <code class="pj-code language-arduino">“Hello World”</code>.
+				Make sure to move the cursor as needed.
+			</p>
+			<p class="mb-3">
+				<code class="pj-code language-arduino">lcd.print(char[] string); </code>
+				<br>
+				<code class="pj-code language-arduino">lcd.print(int num);</code>
+				<br>
+				<code class="pj-code language-arduino">lcd.print(float num);</code>
+			</p>
+			<p class="mb-3">
+				You can clear the LCD with the following function.
+			</p>
+			<p class="mb-3">
+				<code class="pj-code language-arduino">lcd.clear();</code>
+				<br><br>
+				Let’s see all of the code in action!
+			</p>
+			<p class="alert alert-warning mt-2" role="alert">
+				Do not blindly copy-paste the sample code to your project deliverables. Read it, understand it, then adapt it to your own code.
+			</p>
+				<pre class="mb-5"><code class="pj-code language-arduino">#include &lt;LiquidCrystal_I2C.h&gt;
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+void setup()
+{
+	lcd.init(); // initialize the lcd
+	lcd.backlight();
+}
+
+void loop()
+{
+	lcd.clear();                 // clear display
+	lcd.setCursor(0, 0);         // move cursor to   (0, 0)
+	lcd.print("Hello");          // print message at (0, 0)
+	lcd.setCursor(2, 1);         // move cursor to   (2, 1)
+	lcd.print("World");          // print message at (2, 1)
+	delay(1000);                 // delay between each print to LCD
+}</code></pre>
+
+
+			<h3 class="mb-3" id="pj-heading-wifi">WiFi</h3>
+			<p class="mb-3">
+				WiFi is the most popular choice for wireless communication between devices. It uses radio waves to “connect” devices, 
+				allowing them to communicate. While we won’t be using an actual WiFi network, we will use the ESP32’s communication protocol 
+				<b>ESP-NOW</b>, which uses the ESP32’s built-in WiFi module.
+
+			</p>
+			<p class="mb-5">
+				Here’s how we’ll transmit data: One ESP32’s WiFi module will wirelessly transmit messages to another ESP32’s 
+				WiFi module using the ESP-NOW protocol. We won’t dive into the details of how ESP-NOW works, but we will 
+				cover the concept of how radio waves are emitted.
+			</p>
+
+			<h4 class="mb-3 fw-light">Radio Frequency Bands and Channels</h4>
+			<p class="mb-3">
+				Remember that the WiFi modules send information over radio waves, just like our mobile phones, satellites, and WiFi. But how do the <strong> radio waves </strong> emitted by a 
+				satellite not interfere with the radio waves of a WiFi router or iPhone? Let’s explain: Each signal belongs to a <strong>frequency band</strong> or range of contiguous frequencies specified 
+				by the International Telecommunication Union (ITU).
+			</p>
+
+			<img class="pj-img-fluid mx-auto mb-5" src="assets\images\ops_radio_frequency.png" width="1500">
+
+			<p class="mb-3">
+					WiFi exists in 2.4 GHz,5 GHz and 6 GHz bands. These bands are further divided into <strong>channels</strong>.
+					</p>
+
+			<p class="mb-3">
+				For example, 2.4 GHz WiFi 14 channels, each with a different radio frequency within the larger frequency band. FM radio stations are assigned to unique channels, which is why you normally don’t hear 
+				Taylor Swift overlaid with the latest stock market report. WiFi networks close together are assigned to different channels so they do not interfere with each other. For instance, if you and your next-door 
+				neighbor set your WiFi networks to the same channel, the networks would interfere, slowing down your internet speeds.
+				</p>
+			<p class="mb-3">
+				If multiple radio signals were to exist on the same frequency, a collision would occur. This is why the ITU takes special care to regulating the radio spectrum.
+					</p>				
+			<p class="mb-5">
+				The ESP-NOW communication protocol operates on a 2.4 GHz frequency band, which it shares with many WiFi networks. However, 
+				ESP-NOW is not a WiFi network itself; it is a different wireless communication that uses an ESP32’s WiFi module to directly 
+				communicate with another ESP32. While WiFi uses an access point to establish a connection between two devices, ESP-NOW identifies another ESP32 board by its MAC address and uses the ESP32 WiFi module to directly transmit data to that receiver address.
+
+
+			<h4 class="mb-3 fw-light" style="display: inline;">Using the WiFi Library</h4>
+			<p class="mb-3">
+				<br>
+				Download the library <a class="link-primary"
+					href="assets/libraries/WiFiConfig.zip">
+					here </a>.
+				Make sure to include the header file:
+			</p>
+			<p class="mb-3">
+				<code class="pj-code language-arduino">#include &lt;WiFiConfig.h&gt;</code>
+			</p>
+			<p class="mb-3">
+				You need to determine the <b>MAC address</b> of the receiver ESP32 board. Run this sketch 
+				code on your receiver ESP32. The serial monitor should show the <b>MAC address</b> as a series of <b>hexadecimal</b> 
+				numbers separated by colons.
+			</p>
+			<p class="mb-3">
+				<p>
+					Example address: 34:b7:da:f6:3e:78.
+				</p>
+				<pre class="mb-5"><code class="pj-code language-arduino" style="white-space: pre-wrap; height:60vh;">#include &lt;WiFi.h&gt;
+#include &lt;esp_wifi.h&gt;
+
+void readMacAddress(){
+	uint8_t baseMac[6];
+	esp_err_t ret = esp_wifi_get_mac(WIFI_IF_STA, baseMac);
+	if (ret == ESP_OK) {
+	Serial.printf("%02x:%02x:%02x:%02x:%02x:%02x\n",
+					baseMac[0], baseMac[1], baseMac[2],
+					baseMac[3], baseMac[4], baseMac[5]);
+	} else {
+	Serial.println("Failed to read MAC address");
+	}
+}
+
+void setup(){
+	Serial.begin(115200);
+	WiFi.mode(WIFI_STA);
+	WiFi.STA.begin();
+	Serial.print("[DEFAULT] ESP32 Board MAC Address: ");
+	readMacAddress();
+}
+	
+void loop(){
+	Serial.print("[DEFAULT] ESP32 Board MAC Address: ");
+	readMacAddress();
+}</code></pre>
+			</p>
+			<p class="mb-3">
+				Next, create an array to store the receiver ESP32’s <b>MAC address</b>. Each <b>hexadecimal number</b> should be one
+				entry in the array, with the prefix <b>0x</b> to specify that the number is in hexadecimal. So for our example 
+				address 34:b7:da:f6:3e:78, we would initialize the array below:
+			</p>
+			<p class="mb-3">
+				<code class="pj-code language-arduino">uint8_t receiverAddress[] = {0x34, 0xB7, 0xDA, 0xF6, 0x3E, 0x78}</code>
+			</p>
+			<p class="mb-3">
+				The next step is to put your ESP32 board in <b>WiFi mode</b> to prepare the onboard WiFi module for communication and start the ESP-NOW protocol. Place this code in your <code class="pj-code language-arduino">setup()</code> function.
+			</p>
+			<p class ="mb-3">
+				<code class="pj-code language-arduino">wifi_setup();</code>
+			</p>
+			<p class="mb-3">
+				You will set the receiver ESP32 as the transmitting board’s “peer” by passing the receiver board’s 
+				MAC address into the <code class="pj-code language-arduino">peer_setup()</code> function. This ensures ESP-NOW knows which board it is transmitting to.
+			</p>
+			<p class="mb-3">
+				<code class="pj-code language-arduino">peer_setup(receiverAddress);</code>
+			</p>
+			<div class="alert alert-info mt-2 mb-3" role="alert">	
+				(Note: this step is only necessary for your transmitter ESP32 sketch. Your receiver does not need a peer configured because it is not the one sending data.)
+			</div>
+			<p class="mb-3">
+				Let’s move on to the code that would appear in the <code class="pj-code language-arduino">main()</code> loop. This is where weather report messages 
+				will be read and written (transmitted and received). To facilitate the data transfer, you are provided with a special container <code class="pj-code language-arduino">WeatherReport</code> with three member variables that are initialized as follows. Note that these variables are <b>uint8_t</b> type (unsigned 8-bit integers 0-255).
+			</p>
+			<p class="mb-3">
+				Let’s move on to the code that would appear in the <code
+					class="pj-code language-arduino">main()</code> loop. This is where radio messages will be
+				read and written (transmitted and received).
+				To facilitate the data transfer, you are provided with a special container <code
+					class="pj-code language-arduino">WeatherReport</code> with three member variables that are
+				initialized as follows.
+				Note that these variables are <code class="pj-code language-arduino">int</code> type.
+			</p>
+			<p class="mb-3">
+				<code class="pj-code language-arduino">WeatherReport report;</code>
+				<br>
+				<code class="pj-code language-arduino">report.temperature = 77;</code>
+				<br>
+				<code class="pj-code language-arduino">report.humidity = 89;</code>
+				<br>
+				<code class="pj-code language-arduino">report.light = 1;</code>
+			</p>
+			<p class="mb-3">
+				To send a report to the other ESP32, use the <code
+					class="pj-code language-arduino">send_report()</code> function, passing both the receiver 
+					address and <code
+					class="pj-code language-arduino">WeatherReport</code> container as arguments
+			</p>
+			<p class="mb-3">
+				<code class="pj-code language-arduino">send_report(receiverAddress, report);</code>
+			</p>
+			<p class="mb-3">
+				To receive a weather report, you need to configure your other ESP32 as the receiver in its sketch. 
+				Create a global <code class="pj-code language-arduino">WeatherReport</code> variable (for example, report) and use the <code class="pj-code language-arduino">set_report_receiver()</code> function, 
+				passing in the address of the <code class="pj-code language-arduino">WeatherReport</code> container as an argument.
+			</p>
+			<p class="mb-3">
+				<code class="pj-code language-arduino">set_report_receiver(&report);</code>
+			</p>
+			<p class="mb-3">
+				This code ensures that whenever the ESP32 receives data, it will automatically update your WeatherReport 
+				container with the transmitted values. &report is the memory location that contains your WeatherReport, 
+				which is needed to update the values.
+			</p>
+			<p class="mb-3">
+				Here’s an example of all the code put together.
+			</p>
+			<p class="alert alert-warning mt-2" role="alert">
+				Do not blindly copy-paste the sample code to your project deliverables. You will need to determine which functions to use in your individual transmitter and receiver sketches.
+			</p>
+			<pre class="mb-5"><code class="pj-code language-arduino" style="white-space: pre-wrap; height:60vh;">#include &lt;WiFiConfig.h&gt;
+//Find the mac address of your receiver ESP32 first, then enter it in here:
+uint8_t receiverAddress[] = {0x34, 0xB7, 0xDA, 0xF6, 0x3E, 0x78};
+
+WeatherReport report;      // global initialization of WeatherReport
+	
+
+void setup()
+{
+  Serial.begin(115200);                // Serial setup
+  wifi_setup();                      // start wifi mode and ESP-NOW
+  peer_setup(receiverAddress);       // configure receiving address
+  set_report_receiver(&report);      // configure the receiver ESP32 to update report’s values upon reception
+}
+
+void loop()
+{
+  report.temperature = 34; 
+  report.humidity = 70;
+  report.light = 0;
+
+
+  send_report(receiverAddress, report);       // send the report
+  Serial.print("Temperature: ");              // Print temperature
+  Serial.println(report.temperature);
+
+  delay(1000);
+}</code></pre>
+
+
+					<h2 class="mb-3 fw-bold" id="pj-heading-pinout">ESP32 Pinout Diagram</h2>
+					<p class = "mb-3">
+						Thinking about using a pin you don't know what it does? Refer to the ESP32 Board pinout diagram.
+					</p>
+					<p class="mb-3">
+						<img class="pj-img-fluid mx-auto mb-4" src="./assets/images/pinouts/[2024-2025] OPS ESP32-C3 PINOUT.png"
+						width="900">
+						When trying to figure out what pin to use for your specific application/project, refer to the ESP32 Pinout diagram.
+						<br>
+						<ul>
+							<li><strong>NC</strong> stands for <strong>No Connect</strong>, and these pins should be left unconnected at all times.</li>
+							<li><strong>GPIO</strong> stands for a General Purpose Input/Output pin and can be used to send or read signals.</li>
+							<li><strong>ADC</strong> stands for analog to digital converter and it reads the input voltage and makes a digital number to represent that amount of voltage.</li>
+							<li><strong>TXD</strong> stands for transmitt data and can be used to transmitt data using a communication protocols.</li>
+							<li><strong>RXD</strong> stands for receive data and can be used to receive data using communication protocols.</li>
+							<li>The <strong>~ symbol</strong> represents pins that are PWM (Pulse Width Modulation) capable.</li>
+						</ul>
+						<div class="alert alert-info mt-2" role="alert">
+							Info: All GPIO pins are PWM capable.
+						</div>
+					</p>
+
+					<h2 class="mb-3 fw-bold" id="pj-heading-requirements">Requirements</h2>
+
+					<h3 class="mb-3" id="pj-heading-transmitter-station">Transmitter Station</h3>
+					<ul class="mb-5 list-group">
+						<li class="list-group-item">
+							You must build a transmitter that will read data from sensors and send it to the receiving
+							station.
+						</li>
+						<li class="list-group-item">
+							The transmitter must read and interpret data from a light sensor and AHT20 sensor
+							<strong>every 10 seconds</strong>.
+						</li>
+						<li class="list-group-item">
+							The sensor data must include the following:
+							<ul>
+								<li>Temperature</li>
+								<li>Humidity</li>
+								<li>Whether it is day or night</li>
+							</ul>
+						</li>
+						<li class="list-group-item">
+							The sensor data must be accurate.
+						</li>
+						<li class="list-group-item">
+							After the transmitter reads the sensor data, it must immediately send it using the ESP32's WiFi module
+							transceiver.
+						</li>
+						<li class="list-group-item">
+							The circuit must be built on a breadboard.
+						</li>
+					</ul>
+
+					<h3 class="mb-3" id="pj-heading-receiver-station">Receiver Station</h3>
+					<ul class="mb-5 list-group">
+						<li class="list-group-item">
+							You must build a receiver that will collect data sent from the transmitter and display it
+							onto an LCD.
+						</li>
+						<li class="list-group-item">
+							The receiver must update the LCD with the most recently received data over the ESP32’s Wifi Module.
+						</li>
+						<li class="list-group-item">
+							The data received must be identical to the data sent over the ESP32’s Wifi Module.
+						</li>
+						<li class="list-group-item">
+							The data must include the following:
+							<ul>
+								<li>Temperature</li>
+								<li>Humidity</li>
+								<li>Whether it is day or night</li>
+							</ul>
+						</li>
+						<li class="list-group-item">
+							The circuit must be built on a breadboard.
+						</li>
+					</ul>
+
+
+					<h2 class="mb-3 fw-bold" id="pj-heading-parts">Parts</h2>
+
+					<!-- ======= Part Table ======= -->
+					<table class="table pj-part-table mb-5">
+						<thead>
+							<tr>
+								<th scope="col">Part Name</th>
+								<th scope="col">Qty</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Breadboard</td>
+								<td>2</td>
+							</tr>
+							<tr>
+								<td>Battery (9V)</td>
+								<td>1</td>
+							</tr>
+							<tr>
+								<td>9V Snap Connector</td>
+								<td>1</td>
+							</tr>
+							<tr>
+								<td>
+									<a class="pj-part"
+										data-bs-content="<img src='./assets/images/parts/ops_part_lcd_i2c_backpack.png' height='150px' width='auto'>"
+										data-bs-trigger="hover focus" data-bs-toggle="popover" tabindex="0">
+										LCD with I<sup>2</sup>C Backpack
+									</a>
+								</td>
+								<td>1</td>
+							</tr>
+							<tr>
+								<td>
+									<a class="pj-part"
+										data-bs-content="<img src='assets/images/ops_project_6_AHT20pinout.png' height='150px' width='auto'>"
+										data-bs-trigger="hover focus" data-bs-toggle="popover" tabindex="0">
+										AHT20
+									</a>
+								</td>
+								<td>1</td>
+							</tr>
+							<tr>
+								<td>
+									<a class="pj-part"
+										data-bs-content="<img src='assets\images\parts\ops_part_esp32c3fxh4.jpg' height='150px' width='auto'>"
+										data-bs-trigger="hover focus" data-bs-toggle="popover" tabindex="0">
+										ESP32
+									</a>
+								</td>
+								<td>2</td>
+							</tr>
+							<tr>
+								<td>
+									<a class="pj-part"
+										data-bs-content="<img src='./assets/images/parts/ops_part_photoresistor.png' height='150px' width='auto'>"
+										data-bs-trigger="hover focus" data-bs-toggle="popover" tabindex="0">
+										Photoresistor
+									</a>
+								</td>
+								<td>1</td>
+							</tr>
+							<tr>
+								<td>Resistor (4.7kΩ)</td>
+								<td>1</td>
+							</tr>
+							<tr>
+								<td>Jumper Wire</td>
+								<td>?</td>
+							</tr>
+							<tr>
+								<td>Micro USB Cable</td>
+								<td>1</td>
+							</tr>
+						</tbody>
+					</table>
+					<!-- End Part Table -->
+
+					<h2 class="mb-3 fw-bold" id="pj-heading-schematics">Schematics</h2>
+					<div class="accordion mb-5" id="schemAccordian">
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button" type="button" data-bs-toggle="collapse"
+									data-bs-target="#schemCollapse1" aria-expanded="true"
+									aria-controls="schemCollapse1">
+									Schematic A
+								</button>
+							</h2>
+							<!--Pin to page?-->
+							<div id="schemCollapse1" class="accordion-collapse collapse show"
+								data-bs-parent="#schemAccordian">
+								<div class="accordion-body text-center">
+									<img src='./assets/images/project_6/Project 6 Schem A.svg' class="pj-img-fluid mx-auto" width="700">
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+									data-bs-target="#schemCollapse2" aria-expanded="true"
+									aria-controls="schemCollapse2">
+									Schematic B
+								</button>
+							</h2>
+							<!--Pin to page?-->
+							<div id="schemCollapse2" class="accordion-collapse collapse"
+								data-bs-parent="#schemAccordian">
+								<div class="accordion-body text-center">
+									<img src='./assets/images/project_6/Project 6 Schem B.svg' class="pj-img-fluid mx-auto" width="650">
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion-item">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+									data-bs-target="#schemCollapse3" aria-expanded="true"
+									aria-controls="schemCollapse3">
+									Schematic C
+								</button>
+							</h2>
+							<!--Pin to page?-->
+							<div id="schemCollapse3" class="accordion-collapse collapse"
+								data-bs-parent="#schemAccordian">
+								<div class="accordion-body text-center">
+									<img src='./assets/images/project_6/Project 6 Schem C.svg' class="pj-img-fluid mx-auto" width="800">
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<h2 class="mb-3 fw-bold" id="pj-heading-instructions">Instructions</h2>
+
+					<h4 class="mb-3 fw-light" id="pj-heading-checkpoint1" style="">Checkpoint 1</h4>
+					<p class="mb-3">
+						You will test the AHT20 and light sensor, outputting their data to the serial monitor.
+					</p>
+					<ol class="mb-5 list-group list-group-numbered">
+						<li class="list-group-item">
+							Build the circuit in <strong>Schematic A</strong> on one breadboard.
+						</li>
+						<li class="list-group-item">
+							Program the ESP32 board to print the following information to the serial monitor
+							<strong>every 10
+								seconds</strong>:
+							<ul>
+								<li>Temperature</li>
+								<li>Humidity</li>
+								<li>Whether it is day or night</li>
+							</ul>
+						</li>
+						<li class="list-group-item">
+							Upload your sketch to the board, and verify that the system executes as expected.
+							You should see an output similar to the following on the serial monitor:
+							<pre class="mt-3"><code class="pj-code language-plaintext">Temp: 34C
+Humidity: 80%
+Time: Day
+
+Temp: 35C
+Humidity: 81%
+Time: Day
+
+Temp: 36C
+Humidity: 79%
+Time: Night</code></pre>
+
+							<div class="alert alert-warning" role="alert">
+								<strong>Don’t expect the same exact values</strong>; any value within reason is
+								acceptable.
+								The formatting doesn’t have to be exactly the same either.
+							</div>
+						</li>
+					</ol>
+
+					<h4 class="mb-3 fw-light" id="pj-heading-checkpoint2">Checkpoint 2</h4>
+					<p class="mb-3">
+						You will now test the I<sup>2</sup>C Backpack and LCD and print fake weather data to the
+						display.
+					</p>
+					<ol class="mb-5 list-group list-group-numbered">
+						<li class="list-group-item">
+							Build the circuit in <strong>Schematic B</strong> on another breadboard.
+							<div class="alert alert-warning mt-2" role="alert">
+								<strong>Do not disassemble the circuit </strong>from Checkpoint 1.
+							</div>
+							<div class="alert alert-info" role="alert">
+								Connect the LCD to the breadboard using the dupont jumper.
+							</div>
+						</li>
+						<li class="list-group-item">
+							Program the ESP32 board to print the following information to the serial monitor
+							<strong>every 10
+								seconds</strong>:
+							<ul>
+								<li>Temperature</li>
+								<li>Humidity</li>
+								<li>Whether it is day or night</li>
+							</ul>
+						</li>
+						<li class="list-group-item">
+							Upload your sketch to the board, and verify that the system executes as expected.
+							You should see an output similar to the following on the LCD:
+							<img class="pj-img-fluid mx-auto mb-5 d-block" src=".\assets\images\ops_img_proj6_1.png" width="400">
+							<div class="alert alert-info" role="alert">
+								Remember that these are fake values, so they don’t need to be the same on your LCD.
+								The formatting does not have to look identical.
+							</div>
+						</li>
+					</ol>
+
+					<h3 class="mb-3" id="pj-heading-checkpoint3">Checkpoint 3</h3>
+					<p class="mb-3">
+						As the final checkpoint, you will assemble the weather station network, building both the
+						transmitter and receiver stations.
+					</p>
+					<ol class="mb-5 list-group list-group-numbered">
+						<li class="list-group-item">
+							You will design the weather station or transmitter, which will send weather reports to the
+							receiver board with the LCD.
+							Build the circuit in <strong>Schematic C</strong>, which extends Schematic A (Checkpoint 1).
+							<div class="alert alert-warning mt-2" role="alert">
+								<strong>Do not disassemble anything. </strong>Just add to the existing breadboard.
+							</div>
+							<div class="alert alert-info" role="alert">
+								<ul>
+									<li>This circuit will be powered by the 9V battery. <strong>No USB power is
+											required.</strong></li>
+								</ul>
+							</div>
+						</li>
+						<li class="list-group-item">
+							Program the transmitter ESP32 board to send a
+							<code class="pj-code language-arduino">WeatherReport</code> container over ESP32's Wi-Fi Module
+							<strong>every 10
+								seconds</strong>.
+						</li>
+						<li class="list-group-item">
+							Use the circuit that you built in <strong>Schematic B</strong> as the receiver from Checkpoint 2.
+							<div class="alert alert-warning mt-2" role="alert">
+								<strong>Do not disassemble anything. </strong>Just add to the existing breadboard.
+							</div>
+						</li>
+						<li class="list-group-item">
+							Program the receiver ESP32 board to display a
+							<code class="pj-code language-arduino">WeatherReport</code>on the LCD upon receiving one.
+							<div class="alert alert-info mt-2" role="alert">
+								You may set a delay since you only expect a report to be sent every 10 seconds.
+							</div>
+						</li>
+						<li class="list-group-item">
+							Upload your transmitter and receiver sketches to the respective board, and verify that the
+							system
+							executes as expected.
+							<div class="alert alert-info mt-2" role="alert">
+								Every 10 seconds, the transmitting weather station will send a new weather report to the
+								receiver.
+							</div>
+							<div class="alert alert-info mt-2" role="alert">
+								The receiver will display any newly received weather reports on its LCD, which should
+								look like the
+								following (but not necessarily identical):
+							</div>
+							<img class="pj-img-fluid mx-auto mb-5 d-block" src=".\assets\images\ops_img_proj6_1.png" width="400">
+						</li>
+					</ol>
+
+
+					<h2 class="mb-3 fw-bold" id="pj-heading-deliverables">Deliverables</h2>
+					<p class="mb-3">
+						Students enrolled in the course must submit the following deliverables to the corresponding
+						Canvas
+						course assignment:
+						<br>
+						<br>
+						Place the following files in a single folder:
+					</p>
+					<ul class="mb-4 list-group">
+						<li class="list-group-item">
+							<i class="bi bi-check2-square me-2"></i>
+							Photo of the weather station/transmitter ESP32 board
+							<div class="alert alert-info mt-2" role="alert">
+								This photo should include the AHT20, light sensor, and one ESP32
+								correctly wired together.
+							</div>
+						</li>
+						<li class="list-group-item">
+							<i class="bi bi-check2-square me-2"></i>
+							Photo of the receiver ESP32 board
+							<div class="alert alert-info mt-2" role="alert">
+								This photo should include the ESP32 and LCD correctly wired
+								together.
+							</div>
+							<div class="alert alert-info mt-2" role="alert">
+								The LCD should clearly display the temperature, humidity, and time of day (day or
+								night).
+							</div>
+						</li>
+						<li class="list-group-item">
+							<i class="bi bi-check2-square me-2"></i>
+							Transmitter Arduino IDE sketch file
+							<div class="alert alert-info mt-2" role="alert">
+								This file should include all of the code you have written for the ESP32 acting as
+								the
+								transmitter. Name it “<code
+									class="pj-code language-plaintext">ops_project6_transmitter.ino</code>”.
+							</div>
+						</li>
+						<li class="list-group-item">
+							<i class="bi bi-check2-square me-2"></i>
+							Receiver Arduino IDE sketch file
+							<div class="alert alert-info mt-2" role="alert">
+								This file should include all of the code you have written for the ESP32 acting as
+								the
+								receiver. Name it “<code
+									class="pj-code language-plaintext">ops_project6_receiver.ino</code>”.
+							</div>
+						</li>
+					</ul>
+				</li>
+				
+			<p class="mb-3">
+				<strong>Compress</strong> the folder to a <strong>zip</strong> file and rename the file using the format 
+				“<strong>ops_project6_lastname_firstname.zip</strong>” Then, submit the <strong>zip</strong> file to the Project 6 Canvas assignment.
+			</p>
+		</div>
+		</main>
+	</div>
+	<!-- ======= Footer ======= -->
+	<script src="./js/ops_footer.js"></script>
+	<!-- End Footer -->
+</body>
+
+</html>
