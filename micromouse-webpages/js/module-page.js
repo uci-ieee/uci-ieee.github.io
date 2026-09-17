@@ -4,6 +4,9 @@ const SHEET_NAMES = ['Git Tutorial', 'Firmware Tutorial'];
 const sheetTitle = document.getElementById('sheet-title');
 const sheetStatus = document.getElementById('sheet-status');
 const sheetContent = document.getElementById('sheet-content');
+const sheetLayout = document.getElementById('sheet-layout');
+const sheetSidebar = document.getElementById('sheet-sidebar');
+const sheetBookmarkList = document.getElementById('sheet-bookmark-list');
 
 const requestedSheet = new URLSearchParams(window.location.search).get('sheet');
 const sheetName = SHEET_NAMES.includes(requestedSheet) ? requestedSheet : null;
@@ -109,12 +112,35 @@ async function renderSheet() {
         const response = await callSheetAPI(sheetName);
         const rows = rowsFromResponse(response);
 
-        rows.forEach((row) => {
+        rows.forEach((row, index) => {
             const block = renderRow(row);
             if (block) {
+                const header = valueFor(row, 'header');
+                if (header) {
+                    block.id = `sheet-row-${index + 1}`;
+                    const item = document.createElement('li');
+                    item.className = 'nav-item';
+                    const link = document.createElement('a');
+                    link.className = 'nav-link';
+                    link.href = `#${block.id}`;
+                    link.textContent = header;
+                    item.append(link);
+                    sheetBookmarkList.append(item);
+                }
                 sheetContent.append(block);
             }
         });
+
+        if (sheetBookmarkList.children.length) {
+            sheetSidebar.hidden = false;
+            sheetLayout.classList.remove('sheet-layout--no-bookmarks');
+        }
+
+        // Anchors become available only after the spreadsheet request finishes.
+        const anchor = document.getElementById(window.location.hash.slice(1));
+        if (anchor && sheetContent.contains(anchor)) {
+            anchor.scrollIntoView();
+        }
 
         if (!sheetContent.children.length) {
             sheetStatus.textContent = 'This module does not have any content yet.';
