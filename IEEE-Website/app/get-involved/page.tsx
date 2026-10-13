@@ -27,24 +27,7 @@ const membershipOptions = [
     icon: "👥",
     color: "bg-ieee-light",
     textColor: "text-ieee-blue"
-  },
-  {
-    title: "Member++",
-    description: "Member++ is a paid membership ($15/year) which grants you access to some special perks, including access to our 3D printers, ICs/MCUs, Reflow Ovens, and more.",
-    details: "It also comes with a T-Shirt and a 15% DigiKey discount!",
-    icon: "⭐",
-    color: "bg-ieee-blue",
-    textColor: "text-white"
   }
-];
-
-const benefits = [
-  { icon: "🔧", title: "Access to Equipment", description: "3D printers, ICs/MCUs, Reflow Ovens" },
-  { icon: "👕", title: "IEEE T-Shirt", description: "Exclusive member merchandise" },
-  { icon: "💰", title: "DigiKey Discount", description: "15% off on electronic components" },
-  { icon: "🌐", title: "Global Network", description: "Connect with 427,000+ members worldwide" },
-  { icon: "📚", title: "Learning Resources", description: "Access to 200+ journals and publications" },
-  { icon: "🎯", title: "Career Development", description: "Conferences and professional opportunities" }
 ];
 
 const waysToGetInvolved = [
@@ -96,7 +79,7 @@ export default function GetInvolved() {
         </div>
       </section>
 
-      {/* Membership Options */}
+      {/* General Membership */}
       <section className="py-20 bg-ieee-gray">
         <div className="container">
           <motion.div
@@ -104,7 +87,7 @@ export default function GetInvolved() {
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
-            className="grid md:grid-cols-2 gap-8"
+            className="max-w-3xl mx-auto"
           >
             {membershipOptions.map((option) => (
               <motion.div
@@ -116,48 +99,6 @@ export default function GetInvolved() {
                 <h3 className="font-heading text-2xl font-bold mb-4">{option.title}</h3>
                 <p className="text-lg mb-4 opacity-90">{option.description}</p>
                 <p className="font-semibold">{option.details}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Benefits Grid */}
-      <section className="py-20 bg-white">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <h2 className="font-heading text-4xl font-bold text-ieee-slate mb-4">
-              Member++ Benefits
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Unlock exclusive perks and resources with our premium membership
-            </p>
-          </motion.div>
-
-          <motion.div
-            variants={staggerContainer}
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
-            {benefits.map((benefit) => (
-              <motion.div
-                key={benefit.title}
-                variants={fadeInUp}
-                className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-ieee-light"
-              >
-                <div className="text-3xl mb-4">{benefit.icon}</div>
-                <h3 className="font-heading text-xl font-semibold text-ieee-slate mb-2">
-                  {benefit.title}
-                </h3>
-                <p className="text-gray-600">{benefit.description}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -319,16 +260,6 @@ export default function GetInvolved() {
                 className="px-8 py-4 bg-ieee-accent text-white font-semibold rounded-lg hover:bg-white hover:text-ieee-blue transition-all duration-300 text-center"
               >
                 Join General Membership
-              </motion.a>
-              <motion.a
-                href="https://docs.google.com/forms/d/e/1FAIpQLSfsWOkaM8t_Ko4Lo_8SKBNz-ppUAss7ULQdaeygjbxZgRT2_w/viewform"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-white text-ieee-blue font-semibold rounded-lg hover:bg-ieee-light transition-all duration-300 text-center"
-              >
-                Upgrade to Member++
               </motion.a>
             </div>
           </motion.div>
