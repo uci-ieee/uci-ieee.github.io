@@ -16,11 +16,14 @@ function createCard() {
     // link that this card links to the video
     const video = document.currentScript.getAttribute('video');
 
+    // optional object-fit override for the image (e.g. "contain")
+    const fit = document.currentScript.getAttribute('fit');
+
     const content = document.currentScript.getAttribute('content');
 
     document.write(`
         <div class="flex-card card p-3 shadow">
-            <img class="card-image card-img-top" src="${image}" alt="${title}">
+            <img class="card-image card-img-top" src="${image}" alt="${title}"${fit ? ` style="object-fit: ${fit};"` : ""}>
             <div class="card-body flex-card-body mt-1">
                 <h5 class="card-title">${title}</h5>
                 <p class="card-text">
