@@ -25,12 +25,12 @@ const boardSections: BoardSection[] = [
   {
     title: "Executive Board Members",
     officers: [
-      { name: "Sahil Dhaktode", role: "President", email: "dhaktods@uci.edu", discord: "cat.attac", image: "/officerpics/Sahil.JPG" },
-      { name: "Enoch Jin", role: "Vice President", email: "enochkj@uci.edu", discord: "ag719boi", image: "/officerpics/Enoch.JPG" },
-      { name: "Carolynn Nguyen", role: "Secretary", email: "carolypn@uci.edu", discord: "Nunipetunia", image: "/officerpics/Carolynn.JPG" },
+      { name: "Sahil Dhaktode", role: "President", email: "dhaktods@uci.edu", discord: "cat.attac", image: "/officerpics/Sahil.jpg" },
+      { name: "Enoch Jin", role: "Vice President", email: "enochkj@uci.edu", discord: "ag719boi", image: "/officerpics/Enoch.jpg" },
+      { name: "Carolynn Nguyen", role: "Secretary", email: "carolypn@uci.edu", discord: "Nunipetunia", image: "/officerpics/Carolynn.jpg" },
       { name: "Vy Huynh", role: "Treasurer", email: "vynh2@uci.edu", discord: "victory4964", image: "/officerpics/Vy.JPG" },
-      { name: "Vincent Vo", role: "Internal Chair", email: "vtvo3@uci.edu", discord: "notdynosalt2223", image: "/officerpics/Vincent.JPG" },
-      { name: "Chloe Nguyen", role: "External Chair", email: "huyenchn@uci.edu", discord: "itz.chloyo", image: "/officerpics/Chloe.JPG" },
+      { name: "Vincent Vo", role: "Internal Chair", email: "vtvo3@uci.edu", discord: "notdynosalt2223", image: "/officerpics/Vincent.jpg" },
+      { name: "Chloe Nguyen", role: "External Chair", email: "huyenchn@uci.edu", discord: "itz.chloyo", image: "/officerpics/Chloe.jpg" },
     ]
   },
   {
@@ -38,28 +38,28 @@ const boardSections: BoardSection[] = [
     officers: [
       { name: "Braden Fahey", role: "Outreach Coordinator", email: "bjfahey@uci.edu", discord: "baydn", image: "/officerpics/Braden.JPG" },
       { name: "Medha Nalakonda", role: "Outreach Coordinator", email: "mnalakon@uci.edu", discord: "shoe9010", image: "/officerpics/Medha.JPG" },
-      { name: "Lainey Tran", role: "Outreach Coordinator", email: "laineyt@uci.edu", discord: "laineytran", image: "/officerpics/Lainey.JPG" },
+      { name: "Lainey Tran", role: "Outreach Coordinator", email: "laineyt@uci.edu", discord: "laineytran", image: "/officerpics/Lainey.jpg" },
       { name: "Amogh Thiagarajan", role: "Outreach Coordinator", email: "thiagaa1@uci.edu", discord: "amogh0396", image: "/officerpics/Amogh.JPG" },
       { name: "Arianna Sotudeh", role: "Outreach Coordinator", email: "asotudeh@uci.edu", discord: "elecengnr", image: "/officerpics/Arianna.JPG" },
-      { name: "German Cervantes", role: "Lab Manager", email: "germac1@uci.edu", discord: "German9949", image: "/officerpics/German.JPG" },
-      { name: "Eaton Huang", role: "Lab Manager", email: "eatonsh@uci.edu", discord: "eatatonh (h4d3s)", image: "/officerpics/Eaton.JPG" },
-      { name: "Reza Bagheri", role: "Lab Manager", email: "rbagher1@uci.edu", discord: "rezq__", image: "/officerpics/Reza.JPG" },
+      { name: "German Cervantes", role: "Lab Manager", email: "germac1@uci.edu", discord: "German9949", image: "/officerpics/German.jpg" },
+      { name: "Eaton Huang", role: "Lab Manager", email: "eatonsh@uci.edu", discord: "eatatonh (h4d3s)", image: "/officerpics/Eaton.jpg" },
+      { name: "Reza Bagheri", role: "Lab Manager", email: "rbagher1@uci.edu", discord: "rezq__", image: "/officerpics/Reza.jpg" },
       { name: "Neet Patel", role: "Webmaster", email: "neetp1@uci.edu", discord: "chhes", image: "/officerpics/Neet.JPG" },
-      { name: "Angelina Castro", role: "Media Coordinator", email: "amcastr4@uci.edu", discord: "idkangel_", image: "/officerpics/Angelina.JPG" },
+      { name: "Angelina Castro", role: "Media Coordinator", email: "amcastr4@uci.edu", discord: "idkangel_", image: "/officerpics/Angelina.jpg" },
       { name: "Phoebe Chang", role: "Media Coordinator", email: "phoebwc1@uci.edu", discord: "phob_os", image: "/officerpics/Phoebe.JPG" },
-      { name: "Natalie Hoang", role: "Media Coordinator", email: "nlhoang1@uci.edu", discord: "astro.nat", image: "/officerpics/Natalie.JPG" },
+      { name: "Natalie Hoang", role: "Media Coordinator", email: "nlhoang1@uci.edu", discord: "astro.nat", image: "/officerpics/Natalie.jpg" },
       { name: "Stephanie Slade", role: "Media Coord Intern", email: "sslade@uci.edu", discord: "stephsl", image: "/officerpics/Steph.JPG" },
-      { name: "Zicong Yu", role: "Event Coordinator", email: "zicongy1@uci.edu", discord: "kintamashii", image: "/officerpics/Zicong.JPG" },
+      { name: "Zicong Yu", role: "Event Coordinator", email: "zicongy1@uci.edu", discord: "kintamashii", image: "/officerpics/Zicong.jpg" },
       { name: "Dominic Hubschmitt", role: "Event Coordinator", email: "dhubschm@uci.edu", discord: "dalekdom", image: "/officerpics/Dominic.JPG" },
       { name: "Francisco Palomera", role: "Event Coordinator", email: "fpalomer@uci.edu", discord: "oop_8273", image: "/officerpics/Fransico.JPG" },
-      { name: "Milk Sun", role: "iFamilEEE Lead", email: "willis7@uci.edu", discord: "ChoconillaShake", image: "/officerpics/Milk.JPG" },
-      { name: "Gina LeRow", role: "iFamilEEE Lead", email: "glerow@uci.edu", discord: "mistyy0_0", image: "/officerpics/Gina.JPG" },
+      { name: "Milk Sun", role: "iFamilEEE Lead", email: "willis7@uci.edu", discord: "ChoconillaShake", image: "/officerpics/Milk.jpg" },
+      { name: "Gina LeRow", role: "iFamilEEE Lead", email: "glerow@uci.edu", discord: "mistyy0_0", image: "/officerpics/Gina.jpg" },
     ]
   },
   {
     title: "Projects Board Members",
     officers: [
-      { name: "Jonathan Lin", role: "Project Coordinator", email: "jonatl41@uci.edu", discord: "shefujonny", image: "/officerpics/Jonny.JPG" },
+      { name: "Jonathan Lin", role: "Project Coordinator", email: "jonatl41@uci.edu", discord: "shefujonny", image: "/officerpics/Jonny.jpg" },
       { name: "Dylan Vo", role: "Project Coordinator", email: "dylantv1@uci.edu", discord: "vo6112", image: "/officerpics/Dylan.JPG" },
       { name: "Varaprasad Nibhanupudi", role: "Project Coordinator", email: "vnibhanu@uci.edu", discord: "chalkbored", image: "/officerpics/Varaprasad.JPG" },
     ]
@@ -69,7 +69,7 @@ const boardSections: BoardSection[] = [
     officers: [
       { name: "Thea Tan", role: "Micromouse Lead", email: "xirant1@uci.edu", discord: "theatan77", image: "/officerpics/Thea.JPG" },
       { name: "Maahi Vidyarthi", role: "Micromouse Lead", email: "mvidyart@uci.edu", discord: "maahi6413", image: PLACEHOLDER_IMAGE },
-      { name: "Elizabeth Yang", role: "Micromouse Staff", email: "elizaby3@uci.edu", discord: "cloud.wandering", image: "/officerpics/Elizabeth.JPG" },
+      { name: "Elizabeth Yang", role: "Micromouse Staff", email: "elizaby3@uci.edu", discord: "cloud.wandering", image: "/officerpics/Elizabeth.jpg" },
       { name: "Justin Chen", role: "Micromouse Staff", email: "chenjc5@uci.edu", discord: "_fake.item.box", image: "/officerpics/Justin.JPG" },
       { name: "Mason Luu", role: "Micromouse Staff", email: "masonkl@uci.edu", discord: "Perfectalpaca.", image: "/officerpics/Mason.png" },
       { name: "Jeffrey Frederick", role: "Micromouse Staff", email: "jkfreder@uci.edu", discord: "jfrederick2005", image: "/officerpics/Jeffery.JPG" },
@@ -78,9 +78,9 @@ const boardSections: BoardSection[] = [
   {
     title: "OPS Board Members",
     officers: [
-      { name: "Marvin Nguyen", role: "OPS Lead", email: "marvintn@uci.edu", discord: "marvidanoodle", image: "/officerpics/Marvin.JPG" },
-      { name: "Abishek Vinujudson", role: "OPS Lead", email: "asvinuju@uci.edu", discord: "sovereign001", image: "/officerpics/Abishek.JPG" },
-      { name: "Anika Saha", role: "OPS Lab Supervisor", email: "asaha6@uci.edu", discord: "artellite", image: "/officerpics/Anika.JPG" },
+      { name: "Marvin Nguyen", role: "OPS Lead", email: "marvintn@uci.edu", discord: "marvidanoodle", image: "/officerpics/Marvin.jpg" },
+      { name: "Abishek Vinujudson", role: "OPS Lead", email: "asvinuju@uci.edu", discord: "sovereign001", image: "/officerpics/Abishek.jpg" },
+      { name: "Anika Saha", role: "OPS Lab Supervisor", email: "asaha6@uci.edu", discord: "artellite", image: "/officerpics/Anika.jpg" },
       { name: "Radin Jafari", role: "OPS Lab Instructor", email: "rjafari1@uci.edu", discord: "radin71536", image: "/officerpics/Radin.JPG" },
       { name: "Doan (Jackson) Nguyen", role: "OPS Lab Instructor", email: "jacksn2@uci.edu", discord: "jkvpm", image: "/officerpics/Jackson.JPG" },
       { name: "Harsha Ganta", role: "OPS Lab Instructor", email: "hganta@uci.edu", discord: "uchiramen", image: "/officerpics/Harsha.JPG" },
