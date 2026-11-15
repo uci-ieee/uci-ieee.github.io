@@ -241,7 +241,7 @@ type Event = {
 type SheetEvent = Event & { eventType: "upcoming" | "past" };
 
 // Paste the Events spreadsheet's Apps Script web-app URL ending in /exec here.
-const EVENTS_SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbzPz_FHiAFgCmaxrmvUfgr67UhShx6I4cHyxf7L7KjESIN_laiLgZ9t6jNoys6F9vGf4w/exec";
+const EVENTS_SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbxTz337gs9thXUuWSb947WF4Gk0HJOSmKXLNTLe1l6S3_xBcICVynnBthdaWgWKuwQF/exec";
 
 // Retained from the previous page and displayed with past events.
 const movedUpcomingEvents: Event[] = [
