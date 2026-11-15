@@ -4,7 +4,7 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Calendar, MapPin, Clock, Search } from "lucide-react";
 
 /* 
@@ -234,18 +234,17 @@ type Event = {
   time: string;
   location: string;
   description: string;
-  poster: string; // Path to poster image in /public/Events folder
-  category?: "social" | "career" | "workshop" | "collaboration" | "info"; // Optional category
+  poster: string;
+  category?: string;
 };
 
-// ============================================================================
-// UPCOMING EVENTS ARRAY
-// ============================================================================
-// To ADD a new event: Copy an existing event object below, paste it, and fill in your details
-// To REMOVE an event: Delete the entire event object (from { to }, including the comma)
-// See the detailed guide at the top of this file for step-by-step instructions
-// ============================================================================
-const events: Event[] = [
+type SheetEvent = Event & { eventType: "upcoming" | "past" };
+
+// Paste the Events spreadsheet's Apps Script web-app URL ending in /exec here.
+const EVENTS_SHEETS_API_URL = "";
+
+// Retained from the previous page and displayed with past events.
+const movedUpcomingEvents: Event[] = [
   {
     id: "1",
     title: "Northrop Grunman Career Panel",
@@ -276,17 +275,10 @@ const events: Event[] = [
     poster: "/Events/IEEE_Board_Apps.png", // Replace with your event poster path
     category: "info"
   },
-  // Add more events here by copying the structure above
 ];
 
-// ============================================================================
-// PAST EVENTS ARRAY
-// ============================================================================
-// To ADD a past event: Copy an existing event object below, paste it, and fill in your details
-// To REMOVE a past event: Delete the entire event object (from { to }, including the comma)
-// See the detailed guide at the top of this file for step-by-step instructions
-// ============================================================================
-const pastEvents: Event[] = [
+// Historical entries retained from the previous page.
+const existingPastEvents: Event[] = [
   {
     id: "past-1",
     title: "Spring Quarter Kickoff",
@@ -307,8 +299,96 @@ const pastEvents: Event[] = [
     poster: "/Events/welcome.jpg", // Replace with your event poster path
     category: "workshop"
   },
-  // Add more past events here by copying the structure above
 ];
+
+const legacyPastEvents = [...movedUpcomingEvents, ...existingPastEvents];
+
+function rowsFromResponse(response: unknown): unknown[] {
+  if (Array.isArray(response)) return response;
+  if (typeof response !== "object" || response === null) {
+    throw new Error("The Events spreadsheet API returned an unexpected response.");
+  }
+
+  const result = response as Record<string, unknown>;
+  if (typeof result.error === "string") throw new Error(result.error);
+  if (Array.isArray(result.rows)) return result.rows;
+  if (Array.isArray(result.data)) return result.data;
+  if (typeof result.data === "object" && result.data !== null) {
+    const data = result.data as Record<string, unknown>;
+    if (Array.isArray(data.rows)) return data.rows;
+  }
+  throw new Error("The Events spreadsheet API did not return event rows.");
+}
+
+function valueFor(row: Record<string, unknown>, field: string): string {
+  const key = Object.keys(row).find((name) => name.trim().toLowerCase() === field.toLowerCase());
+  const value = key ? row[key] : "";
+  if (typeof value === "string" || typeof value === "number") return String(value).trim();
+  if (typeof value === "object" && value !== null) {
+    const imageValue = value as Record<string, unknown>;
+    const url = imageValue.url ?? imageValue.src;
+    return typeof url === "string" ? url.trim() : "";
+  }
+  return "";
+}
+
+function normalizePosterUrl(value: string): string {
+  const driveFileId = value.match(
+    /drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?.*?id=)([-\w]+)/i
+  )?.[1];
+  const url = driveFileId
+    ? `https://drive.google.com/uc?export=view&id=${driveFileId}`
+    : value;
+
+  try {
+    const parsedUrl = new URL(url);
+    return parsedUrl.protocol === "https:" || parsedUrl.protocol === "http:" ? url : "";
+  } catch {
+    return "";
+  }
+}
+
+function eventsFromRows(rows: unknown[]): { events: SheetEvent[]; skipped: number } {
+  let skipped = 0;
+  const events: SheetEvent[] = [];
+
+  rows.forEach((value, index) => {
+    if (typeof value !== "object" || value === null || Array.isArray(value)) {
+      if (value) skipped += 1;
+      return;
+    }
+
+    const row = value as Record<string, unknown>;
+    const title = valueFor(row, "title");
+    const date = valueFor(row, "date");
+    const time = valueFor(row, "time");
+    const location = valueFor(row, "location");
+    const description = valueFor(row, "description");
+    const poster = normalizePosterUrl(valueFor(row, "poster"));
+    const category = valueFor(row, "category");
+    const eventType = valueFor(row, "eventType").toLowerCase();
+
+    if (![title, date, time, location, description, poster, category, eventType].some(Boolean)) return;
+    if (!title || !date || !time || !location || !description || !poster || (eventType !== "upcoming" && eventType !== "past")) {
+      skipped += 1;
+      return;
+    }
+
+    events.push({
+      id: `sheet-${index}-${eventType}`,
+      title,
+      date,
+      time,
+      location,
+      description,
+      poster,
+      category: category || undefined,
+      eventType,
+    });
+  });
+
+  return { events, skipped };
+}
 
 // Helper function to filter events by search query
 const filterEventsBySearch = (eventsList: Event[], query: string): Event[] => {
@@ -408,8 +488,57 @@ function EventCard({ event }: { event: Event }) {
 
 export default function EventsPage() {
   const [searchQuery, setSearchQuery] = useState("");
-  const filteredEvents = useMemo(() => filterEventsBySearch(events, searchQuery), [searchQuery]);
-  const filteredPastEvents = useMemo(() => filterEventsBySearch(pastEvents, searchQuery), [searchQuery]);
+  const [sheetEvents, setSheetEvents] = useState<SheetEvent[]>([]);
+  const [loadingEvents, setLoadingEvents] = useState(true);
+  const [sheetError, setSheetError] = useState<string | null>(null);
+  const [skippedRows, setSkippedRows] = useState(0);
+
+  useEffect(() => {
+    let active = true;
+
+    const loadEvents = async () => {
+      if (!EVENTS_SHEETS_API_URL.trim()) {
+        setSheetError("The Events spreadsheet API URL has not been configured yet.");
+        setLoadingEvents(false);
+        return;
+      }
+
+      try {
+        const url = new URL(EVENTS_SHEETS_API_URL);
+        url.searchParams.set("sheetName", "Events");
+        const response = await fetch(url.toString(), { cache: "no-store" });
+        if (!response.ok) throw new Error(`The Events spreadsheet API returned HTTP ${response.status}.`);
+
+        const result = eventsFromRows(rowsFromResponse(await response.json()));
+        if (active) {
+          setSheetEvents(result.events);
+          setSkippedRows(result.skipped);
+        }
+      } catch (error) {
+        if (active) {
+          setSheetError(error instanceof Error ? error.message : "Unable to load events from the spreadsheet.");
+        }
+      } finally {
+        if (active) setLoadingEvents(false);
+      }
+    };
+
+    void loadEvents();
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  const upcomingEvents = useMemo(
+    () => sheetEvents.filter((event) => event.eventType === "upcoming"),
+    [sheetEvents]
+  );
+  const pastEvents = useMemo(
+    () => [...legacyPastEvents, ...sheetEvents.filter((event) => event.eventType === "past")],
+    [sheetEvents]
+  );
+  const filteredEvents = useMemo(() => filterEventsBySearch(upcomingEvents, searchQuery), [upcomingEvents, searchQuery]);
+  const filteredPastEvents = useMemo(() => filterEventsBySearch(pastEvents, searchQuery), [pastEvents, searchQuery]);
 
   return (
     <div className="min-h-screen bg-white">
@@ -472,6 +601,21 @@ export default function EventsPage() {
             </div>
           </motion.div>
 
+          {(sheetError || skippedRows > 0) && (
+            <div className="max-w-3xl mx-auto mb-8 space-y-2" aria-live="polite">
+              {sheetError && (
+                <p role="alert" className="rounded-lg bg-amber-50 px-4 py-3 text-center text-amber-900">
+                  Unable to load spreadsheet events: {sheetError}
+                </p>
+              )}
+              {skippedRows > 0 && (
+                <p role="status" className="rounded-lg bg-amber-50 px-4 py-3 text-center text-amber-900">
+                  {skippedRows} spreadsheet row{skippedRows === 1 ? " was" : "s were"} skipped because required fields were missing or eventType was not &quot;upcoming&quot; or &quot;past&quot;.
+                </p>
+              )}
+            </div>
+          )}
+
           {filteredEvents.length > 0 ? (
             <>
               <motion.div
@@ -504,10 +648,18 @@ export default function EventsPage() {
               className="text-center"
             >
               <h2 className="font-heading text-2xl font-bold text-ieee-slate mb-8">
-                {searchQuery ? "No upcoming events match your search" : "No Upcoming Events"}
+                {loadingEvents
+                  ? "Loading upcoming events..."
+                  : searchQuery
+                    ? "No upcoming events match your search"
+                    : "No Upcoming Events"}
               </h2>
               <p className="text-gray-600 mb-8">
-                {searchQuery ? "Try a different search or check out past events below." : "Check back soon for upcoming events!"}
+                {loadingEvents
+                  ? "Fetching events from the spreadsheet."
+                  : searchQuery
+                    ? "Try a different search or check out past events below."
+                    : "Check back soon for upcoming events!"}
               </p>
             </motion.div>
           ) : (
