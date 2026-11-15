@@ -29,7 +29,7 @@ document.write(`
                         <ul class="dropdown-menu" data-bs-theme="light" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="./project_1.html"> Project 1: LED There Be Light</a></li>
                             <li><a class="dropdown-item" href="./project_2.html">Project 2: 555 Piano</a></li>
-                            <li><a class="dropdown-item" href="./coming-soon.html">Project 3: RGB LED Wizard</a></li>
+                            <li><a class="dropdown-item" href="./project_3.html">Project 3: RGB LED Wizard</a></li>
                             <li><a class="dropdown-item" href="./coming-soon.html">Project 4: Arduino Radar</a></li>
                             <li><a class="dropdown-item" href="./coming-soon.html">Project 5: iPoduino v2</a></li>
                             <li><a class="dropdown-item" href="./coming-soon.html">Project 6: Wireless Weather Station</a></li>
