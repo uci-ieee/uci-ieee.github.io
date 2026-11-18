@@ -243,6 +243,9 @@ type SheetEvent = Event & { eventType: "upcoming" | "past" };
 // Paste the Events spreadsheet's Apps Script web-app URL ending in /exec here.
 const EVENTS_SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbxTz337gs9thXUuWSb947WF4Gk0HJOSmKXLNTLe1l6S3_xBcICVynnBthdaWgWKuwQF/exec";
 
+// Use a unique filename from public/Events or one of its subfolders in the poster column.
+const eventPosterPaths: Record<string, string> = JSON.parse(process.env.EVENT_POSTER_PATHS ?? "{}");
+
 // Retained from the previous page and displayed with past events.
 const movedUpcomingEvents: Event[] = [
   {
@@ -333,6 +336,8 @@ function valueFor(row: Record<string, unknown>, field: string): string {
 }
 
 function normalizePosterUrl(value: string): string {
+  if (Object.hasOwn(eventPosterPaths, value)) return eventPosterPaths[value];
+
   const driveFileId = value.match(
     /drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?.*?id=)([-\w]+)/i
   )?.[1];
