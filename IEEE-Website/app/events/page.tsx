@@ -433,6 +433,7 @@ function EventCard({ event }: { event: Event }) {
       {/* Event Poster - Main Focus */}
       <div className="relative h-[500px] md:h-[600px] overflow-hidden">
         <Image
+          unoptimized
           src={event.poster}
           alt={`${event.title} Poster`}
           width={800}
