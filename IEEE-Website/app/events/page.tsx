@@ -306,7 +306,7 @@ const legacyPastEvents = [...movedUpcomingEvents, ...existingPastEvents];
 function rowsFromResponse(response: unknown): unknown[] {
   if (Array.isArray(response)) return response;
   if (typeof response !== "object" || response === null) {
-    throw new Error("The Events spreadsheet API returned an unexpected response.");
+    throw new Error("The Events returned an unexpected response.");
   }
 
   const result = response as Record<string, unknown>;
@@ -317,7 +317,7 @@ function rowsFromResponse(response: unknown): unknown[] {
     const data = result.data as Record<string, unknown>;
     if (Array.isArray(data.rows)) return data.rows;
   }
-  throw new Error("The Events spreadsheet API did not return event rows.");
+  throw new Error("The Events did not return event rows.");
 }
 
 function valueFor(row: Record<string, unknown>, field: string): string {
@@ -498,7 +498,7 @@ export default function EventsPage() {
 
     const loadEvents = async () => {
       if (!EVENTS_SHEETS_API_URL.trim()) {
-        setSheetError("The Events spreadsheet API URL has not been configured yet.");
+        setSheetError("The Events has not been configured yet.");
         setLoadingEvents(false);
         return;
       }
@@ -507,7 +507,7 @@ export default function EventsPage() {
         const url = new URL(EVENTS_SHEETS_API_URL);
         url.searchParams.set("sheetName", "Events");
         const response = await fetch(url.toString(), { cache: "no-store" });
-        if (!response.ok) throw new Error(`The Events spreadsheet API returned HTTP ${response.status}.`);
+        if (!response.ok) throw new Error(`The Events returned HTTP ${response.status}.`);
 
         const result = eventsFromRows(rowsFromResponse(await response.json()));
         if (active) {
@@ -516,7 +516,7 @@ export default function EventsPage() {
         }
       } catch (error) {
         if (active) {
-          setSheetError(error instanceof Error ? error.message : "Unable to load events from the spreadsheet.");
+          setSheetError(error instanceof Error ? error.message : "No events yet!");
         }
       } finally {
         if (active) setLoadingEvents(false);
@@ -605,12 +605,7 @@ export default function EventsPage() {
             <div className="max-w-3xl mx-auto mb-8 space-y-2" aria-live="polite">
               {sheetError && (
                 <p role="alert" className="rounded-lg bg-amber-50 px-4 py-3 text-center text-amber-900">
-                  Unable to load spreadsheet events: {sheetError}
-                </p>
-              )}
-              {skippedRows > 0 && (
-                <p role="status" className="rounded-lg bg-amber-50 px-4 py-3 text-center text-amber-900">
-                  {skippedRows} spreadsheet row{skippedRows === 1 ? " was" : "s were"} skipped because required fields were missing or eventType was not &quot;upcoming&quot; or &quot;past&quot;.
+                  Unable to load events: {sheetError}
                 </p>
               )}
             </div>
@@ -656,7 +651,7 @@ export default function EventsPage() {
               </h2>
               <p className="text-gray-600 mb-8">
                 {loadingEvents
-                  ? "Fetching events from the spreadsheet."
+                  ? "Fetching events..."
                   : searchQuery
                     ? "Try a different search or check out past events below."
                     : "Check back soon for upcoming events!"}
