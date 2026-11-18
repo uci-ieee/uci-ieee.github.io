@@ -337,8 +337,8 @@ function normalizePosterUrl(value: string): string {
     /drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?.*?id=)([-\w]+)/i
   )?.[1];
   const url = driveFileId
-    ? `https://drive.google.com/uc?export=view&id=${driveFileId}`
-    : value;
+  ? `https://drive.google.com/thumbnail?id=${driveFileId}&sz=w1200`
+  : value;
 
   try {
     const parsedUrl = new URL(url);
