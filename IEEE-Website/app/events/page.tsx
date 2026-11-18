@@ -540,7 +540,7 @@ export default function EventsPage() {
     [sheetEvents]
   );
   const pastEvents = useMemo(
-    () => [...legacyPastEvents, ...sheetEvents.filter((event) => event.eventType === "past")],
+    () => [...legacyPastEvents, ...sheetEvents.filter((event) => event.eventType === "past")].reverse(),
     [sheetEvents]
   );
   const filteredEvents = useMemo(() => filterEventsBySearch(upcomingEvents, searchQuery), [upcomingEvents, searchQuery]);
