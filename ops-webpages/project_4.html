@@ -115,8 +115,8 @@
 					</div>
 					<div class="alert alert-light" role="alert">
 						<i class="bi bi-calendar-event me-1"></i>
-						Updated 2026.09.11 <br>
-						By Patrick Cabanban
+						Updated 2026.11.16 <br>
+						By Hengjun Pei
 					</div>
 				</div>
 
@@ -142,7 +142,7 @@
 					diagram.
 				</p>
 
-                <img class="pj-img-fluid mx-auto mb-5" src=".\assets\images\pinouts\[2024-2025] OPS ESP32-C3 PINOUT.png"   width="800">
+                <img class="pj-img-fluid mx-auto mb-5" src="./assets/images/pinouts/[2024-2025] OPS ESP32-C3 PINOUT.png"   width="800">
 				<p class="mb-3">
 				<ul>
 					<li><strong>NC</strong> stands for <strong>No Connect</strong>, and these pins should be left unconnected at all times.</li>
@@ -197,9 +197,9 @@ void setup() {
 void loop() {
 	// Trigger pulse
   digitalWrite(trigPin, LOW);
-  delayMicroseconds(100);
+  delayMicroseconds(2);
   digitalWrite(trigPin, HIGH);
-  delayMicroseconds(100);
+  delayMicroseconds(10);
   digitalWrite(trigPin, LOW);
 
   long duration = pulseIn(echoPin, HIGH);  // Takes measurement of pulse in microseconds
@@ -218,7 +218,7 @@ void loop() {
 				<p class>
 					The ultrasonic sensor is actually rated for <strong>5V</strong>, which means it is advised to use a <strong>voltage divider network</strong> on
 					 the GPIO pins that it connects to. This is because constant 5V exposure to the ESP32 <storng>GPIO</storng> pins, which are
-					 rated for <strong>3.3V</strong>, will possibly damage the module. Below, you will find the connections describing the resistor
+					 rated for <strong>3.3V</strong>, will possibly damage the module. Refer to Schematic B for the resistor
 					 values and configuration you must implement to optimize the ultrasonic sensor’s usage.
 				</p>
 				</div>
@@ -243,7 +243,7 @@ void loop() {
 					the pulse-width modulation (PWM) wire is used to feed a varying PWM signal that
 					determines the servo's position.
 				</p>
-				<p>A demo of using out provided servo is found below:</p>
+				<p>A demo of using our provided servo is found below:</p>
 				<ul>
 					<li>
 						<code class="pj-code language-arduino">Servo your_servo_name</code>
@@ -300,7 +300,7 @@ void loop() {
 					the potentiometer's output pin ranges between the VCC and GND pin voltages, depending on the dial's
 					position.
 				</p>
-				<img class="pj-img-fluid mx-auto mb-5" src=".\assets\images\parts\ops_parts_potentiometer_annotated.png" width="500">
+				<img class="pj-img-fluid mx-auto mb-5" src="./assets/images/parts/ops_parts_potentiometer_annotated.png" width="500">
 
 				<h4 class="mb-3 fw-light">How it Works</h4>
 				<p>
@@ -312,7 +312,7 @@ void loop() {
 					the greater the resistance between the wiper and VCC.
 				</p>
 				<img class="pj-img-fluid mx-auto mb-5"
-					src=".\assets/images/project_4/ops_potentiometer_internal_annotated.png"  width="500">
+					src="./assets/images/project_4/ops_potentiometer_internal_annotated.png"  width="500">
 				<p class="mb-5">
 					In this voltage divider configuration, the wiper reduces the voltage at the output pin the further
 					it is
@@ -334,8 +334,7 @@ void loop() {
 				<h3 class="mb-3" id="pj-heading-assembly">Servo Assembly</h3>
                 <p>To assemble the radar, secure the servo in the mount shown below. Attach the ultrasonic sensor to the servo arm using a suitable sensor mount. Make sure the sensor can rotate freely from 0-180&deg; without pulling on the wires.</p>
                 <p>Download the <a href="assets/project_4_sonar/cad-files/servo_base.stl" download>servo base STL</a>. The ultrasonic sensor mount is not included in the project files.</p>
-                <img class="pj-img-fluid mx-auto mb-5" src="assets/project_4_sonar/assets/servo-assembly.png" width="600" alt="Servo secured in the servo base">
-                <h2 class="mb-3 fw-bold" id="pj-heading-software-installations">Software Installations</h2>
+                <img class="pj-img-fluid mx-auto mb-5" src="assets/project_4_sonar/assets/servo-assembly.png" width="600" alt="Servo secured in the servo base">                <h2 class="mb-3 fw-bold" id="pj-heading-software-installations">Software Installations</h2>
 				<h3 class="mb-3">Servo Library</h3>
 				<p>
 					To download the servo library, click on the Library manager icon on
@@ -344,16 +343,13 @@ void loop() {
 					be using to control the servo. Download the latest version of the arduino
 					library and then you should be able to use the library’s already developed functions.
 				</p>
-				<br><br><br><br><br>
-
-				<br><br><br><br><br>
 				<h3 class="mb-3" id="pj-heading-processing">Processing Setup</h3>
                 <ol class="mb-5 list-group list-group-numbered">
-                    <li class="list-group-item">Download <a href="https://processing.org/download">Processing</a> and open the <a href="assets/project_4_sonar/sonar_display/sonar_display.pde" download>radar display sketch</a>. Keep the sketch in a folder named <code>sonar_display</code>.</li>
+                    <li class="list-group-item">Download and install <a href="https://processing.org/download">Processing</a>. Then download the <a href="assets/project_4_sonar/sonar_display.zip" download>radar display folder</a>, unzip it, and open <code>sonar_display.pde</code> in Processing. Keep the file inside the <code>sonar_display</code> folder.</li>
                     <li class="list-group-item">Run the sketch once to print the available serial ports in the Processing console. Set <code>portName</code> to the port used by your ESP32 in Arduino IDE, then run the sketch again.</li>
                     <li class="list-group-item">Close Arduino IDE's Serial Monitor before running the display. Only one program can use the serial port at a time.</li>
                 </ol>
-                <p>The display shows the servo angle, distance, and objects detected within 20 cm. The Processing display is required for this project.</p>
+                <p>The display reads each line from the ESP32 as <code>angle,distance</code> and splits it at the comma, so your sketch must print exactly that format, one reading per line. The display shows the servo angle, distance, and objects detected within 20 cm. The Processing display is required for this project.</p>
                 <img class="pj-img-fluid mx-auto mb-5" src="assets/project_4_sonar/assets/sonar-graph.png" alt="Processing radar display showing an object at 18.3 cm">
                 <h2 class="mb-3 fw-bolder" id="pj-heading-requirements">Requirements</h2>
 				<h3 class="mb-3" id="pj-heading-poten-control-servo">Potentiometer-Controlled Servo</h3>
@@ -456,35 +452,46 @@ void loop() {
 
 
 				<h2 class="mb-3 fw-bold" id="pj-heading-schematics">Schematics</h2>
-                <p>Use the connections below for the radar. For Checkpoint 1, connect only the potentiometer and servo.</p>
-                <table class="table pj-part-table mb-5">
-                    <thead><tr><th>Part</th><th>Connection</th></tr></thead>
-                    <tbody>
-                        <tr><td>HC-SR04</td><td>VCC to 5V; GND to GND; TRIG to GPIO 5; ECHO through the voltage divider below to GPIO 4.</td></tr>
-                        <tr><td>SG90 Servo</td><td>Signal to GPIO 10; VCC to 5V; GND to shared ground.</td></tr>
-                        <tr><td>Mode Button</td><td>One side to GPIO 8; the other to GND. Use INPUT_PULLUP in the code.</td></tr>
-                        <tr><td>Potentiometer</td><td>VCC to 3.3V; GND to GND; wiper to GPIO 1.</td></tr>
-                    </tbody>
-                </table>
-                <p>For the ECHO voltage divider, connect ECHO through a 1kΩ resistor to GPIO 4. From that junction, connect two 1kΩ resistors in series to GND. Do not connect the 5V ECHO signal directly to GPIO 4.</p>
-                <p>Use a stable 5V supply for the servo. External 5V power is recommended, and all grounds must be shared. Do not power the servo from the ESP32's 3.3V pin.</p>
                 <div class="accordion mb-5" id="schemAccordian">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#schemCollapse1" aria-expanded="false" aria-controls="schemCollapse1">Original Project Schematic</button></h2>
-                        <div id="schemCollapse1" class="accordion-collapse collapse" data-bs-parent="#schemAccordian">
-                            <div class="accordion-body">
-                                <div class="alert alert-info">Follow the connections above: the original drawing labels the servo MG90 and connects the potentiometer to 5V. This project uses an SG90 and a 3.3V potentiometer connection. Add the ECHO voltage divider described above; it is missing from the drawing.</div>
-                                <img src="assets/project_4_sonar/assets/schematic.png" class="pj-schem" alt="Original radar schematic; see corrections above">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <h2 class="mb-3 fw-bold" id="pj-heading-instructions">Instructions</h2>
+					<div class="accordion-item">
+						<h2 class="accordion-header">
+							<button class="accordion-button" type="button" data-bs-toggle="collapse"
+								data-bs-target="#schemCollapse1" aria-expanded="true" aria-controls="schemCollapse1">
+								Schematic A (Potentiometer-Controlled Servo, Checkpoint 1)
+							</button>
+						</h2>
+						<div id="schemCollapse1" class="accordion-collapse collapse show" data-bs-parent="#schemAccordian">
+							<div class="accordion-body text-center">
+								<img src='./assets/images/project_4/ops_p4_sa.svg' class="pj-schem">
+							</div>
+						</div>
+					</div>
+
+					<div class="accordion-item">
+						<h2 class="accordion-header">
+							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+								data-bs-target="#schemCollapse2" aria-expanded="false" aria-controls="schemCollapse2">
+								Schematic B (Arduino Radar)
+							</button>
+						</h2>
+						<div id="schemCollapse2" class="accordion-collapse collapse" data-bs-parent="#schemAccordian">
+							<div class="accordion-body text-center">
+								<img src='./assets/images/project_4/ops_p4_sb.svg' class="pj-schem">
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<h2 class="mb-3 fw-bold" id="pj-heading-instructions">Instructions</h2>
                 <h3 class="mb-3" id="pj-heading-checkpoint1">Checkpoint 1</h3>
 				<ol class="mb-5 list-group list-group-numbered">
 					<li class="list-group-item">
-						Build the potentiometer-controlled servo circuit from the connections above on your breadboard. Use GPIO 1 for the potentiometer and GPIO 10 for the servo.
+						Build the circuit in <strong>Schematic A</strong> on your breadboard. Use GPIO 1 for the potentiometer and GPIO 10 for the servo.
 						Attach the one-sided arm attachment to the servo.
+						<div class="alert alert-warning mt-2" role="alert">
+							Power the servo from the <strong>5V</strong> pin, <strong>not 3.3V</strong>. A stable
+							external 5V supply is recommended, and all grounds must be shared.
+						</div>
 						<div class="alert alert-info mt-2" role="alert">
 							Use the <strong>pseudo code</strong> below to program a potentiometer to control a servo.
 						</div>
@@ -492,8 +499,9 @@ void loop() {
 							These functions may be helpful: <code
 								class="pj-code language-arduino">Serial.begin()</code>,
 							<code class="pj-code language-arduino">pinMode()</code>, <code
-								class="pj-code language-arduino">analogRead()</code>,
-							and the servo fuctions above.</div>
+								class="pj-code language-arduino">analogRead()</code>, <code
+								class="pj-code language-arduino">map()</code>,
+							and the servo functions above.</div>
 						<pre class="mt-3" style="white-space: pre-wrap;"><code class="pj-code language-arduino">#include &lt;ESP32Servo.h&gt;
 
 // Assign variable to pin number for Potentiometer
@@ -521,10 +529,46 @@ void loop() {
 
 				<h3 class="mb-3" id="pj-heading-checkpoint2">Checkpoint 2</h3>
                 <ol class="mb-5 list-group list-group-numbered">
-                    <li class="list-group-item">Build the complete radar circuit from the connections above on your breadboard. Mount the ultrasonic sensor on the servo.</li>
-                    <li class="list-group-item">Open the <a href="assets/project_4_sonar/skeleton/skeleton.ino" download>starter sketch</a> in Arduino IDE. Complete the distance measurements and automatic sweep. The servo must reverse direction at 0&deg; and 180&deg;.</li>
+                    <li class="list-group-item">Build the circuit in <strong>Schematic B</strong> on your breadboard. Mount the ultrasonic sensor on the servo.</li>
+                    <li class="list-group-item">
+                        Open the <a href="assets/project_4_sonar/skeleton/skeleton.ino" download>starter sketch</a> in Arduino IDE. Complete the distance measurements and automatic sweep. The servo must reverse direction at 0&deg; and 180&deg;.
+                        <div class="alert alert-info mt-2" role="alert">
+                            Use the <strong>pseudo code</strong> below to complete the program.
+                        </div>
+                        <div class="alert alert-info mt-2" role="alert">
+                            These functions may be helpful: <code class="pj-code language-arduino">digitalWrite()</code>,
+                            <code class="pj-code language-arduino">delayMicroseconds()</code>, <code
+                                class="pj-code language-arduino">pulseIn()</code>, <code
+                                class="pj-code language-arduino">digitalRead()</code>, <code
+                                class="pj-code language-arduino">map()</code>,
+                            and the servo functions above.</div>
+                        <pre class="mt-3" style="white-space: pre-wrap;"><code class="pj-code language-arduino">// Measure distance:
+//   Send a 10 microsecond HIGH pulse on the TRIG pin
+//   Use the echo pulse time to calculate the distance in cm
+//   If no echo is received, the distance is -1
+
+void loop() {
+	// Check the button and toggle between manual and automatic mode
+
+	// If in manual mode:
+	//   Read the potentiometer and map it to an angle from 0-180
+	// Otherwise (automatic mode):
+	//   Step the angle up or down, and reverse direction at 0 and 180
+
+	// Move the servo to the angle
+	// Measure the distance
+	// Send "angle,distance" over Serial
+}
+</code></pre>
+                    </li>
                     <li class="list-group-item">Program the button to switch between automatic and manual modes once per press. When returning to automatic mode, reset the servo to 0&deg; before resuming the sweep. The starter sketch's button handling is simplified; make sure holding the button does not repeatedly switch modes.</li>
-                    <li class="list-group-item">Send each reading over Serial at 115200 baud in the format <code>angle,distance</code>, followed by a newline. Measure distance in centimeters. Send -1 when no echo is received. The <a href="assets/project_4_sonar/combined/combined.ino" download>complete reference sketch</a> demonstrates the required behavior.</li>
+                    <li class="list-group-item">Send each reading over Serial at 115200 baud in the format <code>angle,distance</code>, followed by a newline. Measure distance in centimeters. Send -1 when no echo is received. The <a href="assets/project_4_sonar/combined/combined.ino" download>complete reference sketch</a> demonstrates the required behavior.
+                        You should see an output similar to the following on the serial monitor:
+                        <pre class="mt-3"><code class="pj-code language-plaintext">0,18.43
+2,18.51
+4,-1
+6,-1</code></pre>
+                    </li>
                     <li class="list-group-item">Upload your sketch to the ESP32, and verify that the program executes as expected. Close Serial Monitor, then run the Processing sketch using the setup instructions above.</li>
                     <li class="list-group-item">Verify that the radar display follows the servo in both modes. Place an object less than 20 cm from the sensor and verify that the display shows the object and its distance.</li>
                 </ol>
